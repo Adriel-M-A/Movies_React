@@ -1,6 +1,6 @@
-import { MovieCard } from "./MovieCard";
-import { get } from "../utils/httpClient";
 import { useEffect, useState } from "react";
+import { getMovies } from "../utils/httpClient";
+import { MovieCard } from "./MovieCard";
 import { Link } from "react-router-dom";
 
 export function MoviesCarousel(props) {
@@ -9,11 +9,19 @@ export function MoviesCarousel(props) {
   const moviesPerGroup = 6;
 
   useEffect(() => {
-    const tipo = props.tipo;
-    get(`/movie/${tipo}`).then((data) => {
-      setMovies(data.results);
-    });
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await getMovies(
+          `/search/basic?country=us&service=${props.service}&type=movie&genre=${props.genre}&page=1&output_language=en&language=en`
+        );
+        setMovies(response.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [props.service, props.genre]);
 
   const handlePrev = () => {
     setCurrentGroupIndex((prev) =>
@@ -90,7 +98,7 @@ export function MoviesCarousel(props) {
         <div className="overflow-hidden">
           <div className="flex">
             {currentGroup.map((movie) => (
-              <div key={movie.id}>
+              <div key={movie.tmdbID}>
                 <MovieCard movie={movie} />
               </div>
             ))}

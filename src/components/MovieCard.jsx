@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export function MovieCard({ movie }) {
-  const imageUrl = "https://image.tmdb.org/t/p/original" + movie.poster_path;
+  const imageUrl = "URL_BASE_IMAGEN" + movie.poster_path; // Reemplaza "URL_BASE_IMAGEN" por la URL base de las imágenes de la nueva API
 
   return (
     <Link to={`/movie/${movie.id}`}>
@@ -9,7 +9,7 @@ export function MovieCard({ movie }) {
         <img
           className="w-60 h-80 rounded-lg shadow-md transition-transform duration-200 transform hover:scale-105 object-cover"
           src={imageUrl}
-          alt={movie.title}
+          alt={movie.title} // Asegúrate de utilizar la propiedad correcta para el título de la película
         />
       </div>
     </Link>

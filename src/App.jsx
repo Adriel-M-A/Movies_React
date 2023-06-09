@@ -29,10 +29,10 @@ function App() {
                 </>
               }
             />
-            <Route path="/mejores" element={<MoviesGrid tipo="top_rated" />} />
+            {/* <Route path="/mejores" element={<MoviesGrid tipo="top_rated" />} />
             <Route path="/nuevo" element={<MoviesGrid tipo="now_playing" />} />
             <Route path="/popular" element={<MoviesGrid tipo="popular" />} />
-            <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/movie/:id" element={<MovieDetails />} /> */}
           </Routes>
         </main>
       </div>

@@ -1,5 +1,5 @@
 import { MovieCard } from "./MovieCard";
-import { get } from "../utils/httpClient";
+import { getMovies } from "../utils/httpClient";
 import { useEffect, useState } from "react";
 
 function Pagination({ totalPages, currentPage, handlePageChange }) {
@@ -60,11 +60,11 @@ export function MoviesGrid(props) {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </ul>
-      <Pagination
+      {/* <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         handlePageChange={handlePageChange}
-      />
+      /> */}
     </div>
   );
 }

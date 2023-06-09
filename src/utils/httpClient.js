@@ -1,11 +1,21 @@
-const API = "https://api.themoviedb.org/3";
+const baseUrl = "https://streaming-availability.p.rapidapi.com";
 
-export function get(path) {
-  return fetch(API + path, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YmMyNTZlMGNjZjM1MzkxOTMxZDg5YjkyYjE1MTBhMCIsInN1YiI6IjYzZTg1MDAzNjNhYWQyMDA4Zjg1YTM0NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.om74K_6IUfHirygkrWYTuRHWgmWbJWQGjx5MpeT0IjM",
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  }).then((result) => result.json());
+const options = {
+  headers: {
+    "X-RapidAPI-Key": "54996cc34cmsh56bbb3ad4780520p17a8d0jsnb76037d0fcb1",
+    "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com",
+  },
+};
+
+export async function getMovies() {
+  const url = `${baseUrl}/search/basic?country=us&service=netflix&type=movie&genre=18&page=1&output_language=en&language=en`;
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
